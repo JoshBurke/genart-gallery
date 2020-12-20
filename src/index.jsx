@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Line from './Line';
+import Line from './works/Line';
 // eslint-disable-next-line import/no-cycle
 import Menu from './Menu';
 import reportWebVitals from './reportWebVitals';

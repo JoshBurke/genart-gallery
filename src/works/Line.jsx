@@ -1,19 +1,21 @@
 import './Line.css';
 import React from 'react';
-import getRandomInt from './services/numberUtils';
+import Canvas from '../common/Canvas';
+import getRandomInt from '../services/numberUtils';
 
 class Line extends React.Component {
   constructor(props) {
     super(props);
+    this.canvas = React.createRef();
     this.state = {
       canvas: undefined,
-
     };
   }
 
   componentDidMount() {
     this.setState({ canvas: document.getElementById('canvas') }, () => {
-      this.setState({ ctx: this.setupCanvas() }, () => {
+      const canvObj = this.canvas.current;
+      this.setState({ ctx: canvObj.setupCanvas() }, () => {
         this.setupAndDraw();
       });
     });
@@ -31,25 +33,6 @@ class Line extends React.Component {
       100,
       20,
     );
-  }
-
-  setupCanvas() {
-    const { canvas } = this.state;
-    // Get the device pixel ratio, falling back to 1.
-    const dpr = window.devicePixelRatio || 1;
-    // Get the size of the canvas in CSS pixels.
-    canvas.width = window.innerWidth / 2;
-    canvas.height = window.innerHeight / 2;
-    const rect = canvas.getBoundingClientRect();
-    // Give the canvas pixel dimensions of their CSS
-    // size * the device pixel ratio.
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    const ctx = canvas.getContext('2d');
-    // Scale all drawing operations by the dpr, so you
-    // don't have to worry about the difference.
-    ctx.scale(dpr, dpr);
-    return ctx;
   }
 
   drawLine(start, end, stepSize, maxLines, radius) {
@@ -80,7 +63,7 @@ class Line extends React.Component {
     return (
       <div className="Line">
         <header className="Line-header">
-          <canvas id="canvas" />
+          <Canvas ref={this.canvas} />
         </header>
       </div>
     );
