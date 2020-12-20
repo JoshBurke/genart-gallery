@@ -12,12 +12,14 @@ class Line extends React.Component {
   }
 
   componentDidMount() {
-    this.setupAndDraw();
+    this.setState({ canvas: document.getElementById('canvas') }, () => {
+      this.setState({ ctx: this.setupCanvas() }, () => {
+        this.setupAndDraw();
+      });
+    });
   }
 
   setupAndDraw() {
-    this.state = { canvas: document.getElementById('canvas') };
-    this.state = { ctx: this.setupCanvas() };
     const { canvas, ctx } = this.state;
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
