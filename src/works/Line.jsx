@@ -1,4 +1,3 @@
-import './Line.css';
 import React from 'react';
 import Canvas from '../common/Canvas';
 import getRandomInt from '../services/numberUtils';
