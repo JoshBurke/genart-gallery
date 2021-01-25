@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {
+  Route,
+  HashRouter,
+} from 'react-router-dom';
 import Line from './works/Line';
-// eslint-disable-next-line import/no-cycle
+import Spirograph from './works/Spirograph';
 import Menu from './Menu';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Menu />
-    <Line />
-  </React.StrictMode>,
+  <HashRouter>
+    <React.StrictMode>
+      <Menu />
+      <Route exact path="/" component={Line} />
+      <Route path="/line" component={Line} />
+      <Route path="/spirograph" component={Spirograph} />
+    </React.StrictMode>
+  </HashRouter>,
   document.getElementById('root'),
 );
 

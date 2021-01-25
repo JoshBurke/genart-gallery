@@ -1,20 +1,37 @@
 import React from 'react';
 import Canvas from '../common/Canvas';
 
-export default function Spirograph() {
+export default class Spirograph extends React.Component {
+  constructor(props) {
+    super(props);
+    this.canvas = React.createRef();
+    this.state = {
+      canvas: undefined,
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ canvas: document.getElementById('canvas') }, () => {
+      const canvObj = this.canvas.current;
+      this.setState({ ctx: canvObj.setupCanvas() }, () => {
+        this.setupAndDraw();
+      });
+    });
+  }
+
   // Setup
-  const canvasRef = React.createRef();
-  const canvas = document.getElementById('canvas');
-  const ctx = canvasRef.current.setupCanvas();
+  setupAndDraw() {
+    const { canvas, ctx } = this.state;
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
 
-  ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Spirograph codesss
-
-  return (
-    <div className="spirograph">
-      <Canvas ref={canvasRef} />
-    </div>
-  );
+  // Spirograph code
+  render() {
+    return (
+      <div className="spirograph">
+        <Canvas ref={this.canvas} />
+      </div>
+    );
+  }
 }

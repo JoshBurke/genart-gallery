@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './Menu.css';
 
 class MenuLinks extends React.Component {
@@ -9,6 +10,9 @@ class MenuLinks extends React.Component {
       links: [{
         text: 'Line',
         link: '/line',
+      }, {
+        text: 'Spirograph',
+        link: '/spirograph',
       }],
     };
   }
@@ -18,7 +22,7 @@ class MenuLinks extends React.Component {
     const { menuStatus } = this.props;
     const outLinks = links.map((link, i) => (
       <li ref={i + 1}>
-        <a href={link.link}>{link.text}</a>
+        <NavLink to={link.link}>{link.text}</NavLink>
       </li>
     ));
 
