@@ -9,8 +9,6 @@ Randomly generated line art:
 
 ![Line](https://i.imgur.com/CeehT0N.png)
 
-### Infinite Spirograph (under construction)
-
 ## Available Scripts
 
 In the project directory, you can run:
